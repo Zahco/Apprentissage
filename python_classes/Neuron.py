@@ -1,4 +1,5 @@
 import random
+from copy import copy
 
 BASE_WEIGHT = 10
 RECOMPENSE = 8
@@ -9,6 +10,7 @@ class NeuronNetwork:
         self.neurons = []
         for i in range(1, nbSticks + 1):
             self.neurons.append(Neuron(self, i))
+        # Création des connexions avec poid par défaut
         for neuron in self.neurons:
             neuron.makeConnections(maxDist, nbSticks, BASE_WEIGHT)
         self.initPath()
@@ -53,39 +55,63 @@ class NeuronNetwork:
 
 class Neuron:
     def __init__(self, network, index):
+        # Réseau dans lequel est contenu le Neuron
         self.network = network
+        # Correspond au nombre de baton restant
         self.index = index
+        # Liaison vers d'autre neuron avec un indice de poid.
+        # Map<Neuron, int>
         self.connections = {}
 
     def makeConnections(self, maxDist, nbSticks, baseWeight):
+        # index != 15 , nb = 7
         if self.index != nbSticks:
             nb = maxDist * 2 + 1
-        else:
+        else: # pour index = 15, nb = 4
             nb = maxDist + 1
         for i in range(1, nb):
             neuron = self.network.getNeuron(self.index - i)
+            # Si le neuron existe on crée une connexion
             if neuron != None:
                 self.connections[neuron] = baseWeight
 
+    # Choisi le neuron à jouer avec la méthode weighted_choice
+    # Le neuron doit être atteignable (vérifié par testNeuron)
+    # Condition d'arret:
+    # 0 <= connectionsClone.len <= connections.len
     def chooseConnectedNeuron(self, shift):
-        neuron = network[shift + self.index]
-        return weighted_choice(neuron.connections)
+        connectionsClone = copy(self.connections)
+        neuron = weighted_choice(connectionsClone)
+        print("shift: ", shift, " - index: ", neuron.index)
+        while (connectionsClone.len > 0 and not testNeuron(neuron.index + shift)):
+            connectionsClone.pop(neuron)
+            neuron = weighted_choice(connectionsClone)
+            print("index courrent: ", self.index," - shift: ", shift, " - index jouable ?: ", neuron.index)
+        return neuron
+
     def testNeuron(self, inValue):
         dif = inValue - self.index
         return dif >= 1 and dif <= 3
+
+    # Ajoute une récompense au poid de la connexion avec un neuron donné
     def recompenseConnection(self, neuron):
-        pass
+        self.connections[neuron] += RECOMPENSE
+
     def printConnections(self):
         print("Connections of", self.asString() + ":")
         for neuron in self.connections:
             print(neuron.asString(), self.connections[neuron])
     def asString(self):
         return "N" + str(self.index)
+
+    # Choisi une aléatoirement un neuron parmis des connexions
+    # en favorisant la connexion la plus lourde.
     def weighted_choice(self, connections):
-       total = sum(w for c, w in connections.items())
-       r = random.uniform(0, total)
-       upto = 0
-       for c, w in connections.items():
-          if upto + w >= r:
-              return c
-          upto += w
+        # Somme total du poid des connexions
+        total = sum(w for c, w in connections.items())
+        r = random.uniform(0, total)
+        upto = 0
+        for c, w in connections.items():
+            if upto + w >= r:
+                return c
+            upto += w

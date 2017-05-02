@@ -1,6 +1,8 @@
 import random
 from Neuron import *
 
+MAX_DIST = 3
+
 class Player:
     def __init__(self, name):
         self.name = name
@@ -24,7 +26,7 @@ class HumanPlayer(Player):
                 nb = input('Sticks?\n')
                 try:
                     nb = int(nb)
-                    if nb >= 1 and nb <= 3 and sticks - nb >= 0:
+                    if nb >= 1 and nb <= MAX_DIST and sticks - nb >= 0:
                         correct=True
                 except: pass
             return nb
@@ -33,8 +35,8 @@ class CPUPlayer(Player):
     def __init__(self, name, mode, nbSticks):
         super().__init__(name)
         self.mode = mode
-        self.netw = NeuronNetwork(3, nbSticks)
-        self.previousNeuron = None
+        self.netw = NeuronNetwork(MAX_DIST, nbSticks)
+        self.previousNeuron = NeuronNetwork.getNeuron(nbSticks)
     def play(self, sticks):
         if self.mode == 'easy':
             return self.playEasy(sticks)
@@ -42,17 +44,31 @@ class CPUPlayer(Player):
             return self.playHard(sticks)
         else:
             return self.playMedium(sticks)
+
     def playMedium(self, sticks):
-        if sticks <= 4 and sticks >= 2:
+        if sticks <= MAX_DIST + 1 and sticks >= 2:
             return sticks - 1
         else:
             return self.playRandom(sticks)
+
     def playEasy(self, sticks):
         return self.playRandom(sticks)
+
     def playRandom(self, sticks):
-        return random.randint(1, (sticks % 3) + 1)
+        return random.randint(1, (sticks % MAX_DIST) + 1)
+
     def playHard(self, sticks):
-        return self.playMedium(sticks)
+        # Calcul du shift (coup joué par l'utilisateur)
+        shift = self.previousNeuron.index - sticks
+        # Choix du neuron
+        neuron = self.previousNeuron.chooseConnectedNeuron(shift)
+        # Enregistrement du choix du neuron (pour les futures récompenses)
+        self.getNeuronNetwork().activateNeuronPath(self.previousNeuron, neuron)
+        # Enregistrement du previous neuron
+        self.previousNeuron = neuron
+        return sticks - neuron.index
+
+
     def getNeuronNetwork(self):
         return self.netw
     def addWin(self):
