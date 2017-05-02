@@ -111,4 +111,35 @@
     \end{axis}
     \end{tikzpicture}
   
+  \paragraph{}
+    \begin{tikzpicture}
+     \begin{axis}[
+	title={Évolution du taux moyen de réussite contre un joueur \textbf{hard} sans changement de rôle},
+	ylabel={Taux de réussite en pourcentage },
+	xlabel={Nombre de parties},
+	ymin=0, ymax=100,ytick={0,20,40,60,80,100},
+	xmin=0, xmax=7,xtick={0,1,2,3,4,5,6,7},
+	xticklabels={0,100,500,1.000,5.000,10.000,50.000,100.000},
+	scaled ticks=false,
+	tick label style={/pgf/number format/fixed}, smooth,
+	legend entries={Second joueur easy,Second joueur medium,Second joueur hard},
+	legend style={at={(1,0)},anchor=south east},
+	legend cell align={left}
+    ]
+    \addplot[color=green,mark=square,]
+	coordinates {(0,50)(1,90)(2, 96)(3, 97)(4, 98)(5, 98)(6, 99)(7, 99.5)};
+    \addplot[color=blue,mark=square,]
+	coordinates {(0,5)(1,50)(2, 76)(3, 81)(4, 89)(5, 90)(6, 93)(7, 94)};
+    \addplot[color=red,mark=square,]
+	coordinates {(0,50)(1,47)(2, 60)(3, 68)(4, 81)(5, 89)(6, 95)(7, 97)};
+  
+    \end{axis}
+    \end{tikzpicture}
+
+  \paragraph{}
+    Pour conclure, si nous voulons jouer contre le CPU en mode \emph{hard}, il sera toujours possible de gagner.
+    En effet le CPU choisi aléatoirement parmi ces connexions en favorisant les connexions à fort poids. 
+    Néanmoins la chance que le CPU choisisse une connexion perdante sera toujours non nul. Même si le CPU est bien entraîné,
+    avec de la patience, il sera toujours possible de gagner une partie contre lui.
+  
 \end{document}
