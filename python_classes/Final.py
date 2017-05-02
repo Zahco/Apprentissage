@@ -11,7 +11,7 @@ def Final(sticks):
         print("Invalid mode, please choose a correct mode from the following: ")
         print("1 -> easy, 2 -> medium, 3 -> hard")
         mode = input("Mode?:")
-    mode = self.switch(mode)
+    mode =switch(mode)
     p = HumanPlayer(name)
     p1 = CPUPlayer("Nim", mode, sticks)
     if hasattr(p1, 'netw'):
@@ -25,14 +25,14 @@ def Final(sticks):
     if (turn in ['1', 'yes']):
         print(name, " vs Nim!")
         print(name, " starts!")
-        Game(sticks)start(p, p1, True)
+        Game(sticks).start(p, p1, True)
     else:
         print("Nim vs ", name)
         print("Nim starts!")
         Game(sticks).start(p1, p, True)
 
 
-def switch(self, x):
+def switch(x):
     return {
         1: 'easy',
         2: 'medium',
