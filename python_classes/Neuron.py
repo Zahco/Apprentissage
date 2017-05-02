@@ -81,12 +81,12 @@ class Neuron:
     # 0 <= connectionsClone.len <= connections.len
     def chooseConnectedNeuron(self, shift):
         connectionsClone = copy(self.connections)
-        neuron = weighted_choice(connectionsClone)
-        print("shift: ", shift, " - index: ", neuron.index)
-        while (connectionsClone.len > 0 and not testNeuron(neuron.index + shift)):
+        neuron = self.weighted_choice(connectionsClone)
+       # print("shift: ", shift, " - index: ", neuron.index)
+        while (len(connectionsClone) > 0 and not neuron.testNeuron(self.index-shift)):
             connectionsClone.pop(neuron)
-            neuron = weighted_choice(connectionsClone)
-            print("index courrent: ", self.index," - shift: ", shift, " - index jouable ?: ", neuron.index)
+            neuron = self.weighted_choice(connectionsClone)
+          #  print("index courrent: ", self.index," - shift: ", shift, " - index jouable ?: ", neuron.index)
         return neuron
 
     def testNeuron(self, inValue):

@@ -36,7 +36,7 @@ class CPUPlayer(Player):
         super().__init__(name)
         self.mode = mode
         self.netw = NeuronNetwork(MAX_DIST, nbSticks)
-        self.previousNeuron = NeuronNetwork.getNeuron(nbSticks)
+        self.previousNeuron = None
     def play(self, sticks):
         if self.mode == 'easy':
             return self.playEasy(sticks)
@@ -58,6 +58,11 @@ class CPUPlayer(Player):
         return random.randint(1, (sticks % MAX_DIST) + 1)
 
     def playHard(self, sticks):
+        if sticks == 1:
+            return 1
+        if (self.previousNeuron is None):
+            self.previousNeuron = self.netw.getNeuron(sticks)
+       # print("previous neuron now equal to ", self.previousNeuron.index)
         # Calcul du shift (coup joué par l'utilisateur)
         shift = self.previousNeuron.index - sticks
         # Choix du neuron
