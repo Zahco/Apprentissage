@@ -80,6 +80,8 @@ class CPUPlayer(Player):
         super().addWin()
         self.netw.recompenseConnections()
         self.previousNeuron = None
+        self.netw.initPath()
     def addLoss(self):
         super().addLoss()
         self.previousNeuron = None
+        self.netw.initPath()
