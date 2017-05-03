@@ -3,8 +3,8 @@ from Game import *
 #Script final permettant le lancement du jeu.
 #Le Joueur joue contre le niveau de CPU qu'il souhaite.
 #S'il joue contre un hard, un réseau de neurone est chargé (nous pouvons changer le réseau de neurone
-#dans le script de lancement)
-#Le Joueur peut choisir s'il commence à jouer ou non.
+#dans l'appelle du script de lancement)
+#Le Joueur peut choisir s'il commence à jouer en premier ou non.
 def final(sticks, network):
     print("Welcome to Nim's game!")
     print("Please input your name:")

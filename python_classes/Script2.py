@@ -1,6 +1,6 @@
 from Game import *
 
-#Deux CPU hars jouent l'un contre l'autre pendant 800 parties.
+#Deux CPU hards jouent l'un contre l'autre pendant 800 parties.
 #Nous évaluons ensuite leurs nombres de victoire ainsi que leur réseaux de neurones
 def script2(sticks):
     p = CPUPlayer("CPU", "hard", sticks)

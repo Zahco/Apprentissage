@@ -2,6 +2,7 @@
 from Player import *
 import pickle
 
+# Classe permettant de faire jouer les joueurs tour à tour
 class Game:
     def __init__(self, nbSticks):
         self.nbSticks = nbSticks

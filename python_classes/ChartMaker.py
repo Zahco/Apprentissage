@@ -2,7 +2,7 @@ from Game import *
 
 # Méthode permettant de faire les graphiques que nous utilisons dans notre rapport
 # Nous faisons une moyenne sur 50 pour éliminer au maximum le facteur aléatoire
-# ! Attention ! : Ces tests prennent longtemps (5-10 min) (surtout pour les 3 derniers)
+# ! Attention ! : Ces tests prennent longtemps (5-10 min) (surtout pour les 3 dernières phases)
 def chartMaker(sticks):
     sum = 0
     for i in range(0, 50):
