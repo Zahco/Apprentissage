@@ -63,10 +63,13 @@ class CPUPlayer(Player):
             return 1
         if (self.previousNeuron is None):
             self.previousNeuron = self.netw.getNeuron(sticks)
+       # self.previousNeuron = self.netw.getNeuron(sticks)
         # Calcul du shift (coup joué par l'utilisateur)
         shift = self.previousNeuron.index - sticks
         # Choix du neuron
         neuron = self.previousNeuron.chooseConnectedNeuron(shift)
+        if neuron is None:
+            print("halt!")
         # Enregistrement du choix du neuron (pour les futures récompenses)
         self.getNeuronNetwork().activateNeuronPath(self.previousNeuron, neuron)
         # Enregistrement du previous neuron
@@ -86,5 +89,6 @@ class CPUPlayer(Player):
     # Réinitialise le joueur
     def addLoss(self):
         super().addLoss()
+        self.netw.punisConnections()
         self.previousNeuron = None
         self.netw.initPath()
