@@ -63,11 +63,11 @@ class Neuron:
         # Map<Neuron, int>
         self.connections = {}
 
+    # Crée les connexions initiales
     def makeConnections(self, maxDist, nbSticks, baseWeight):
-        # index != 15 , nb = 7
         if self.index != nbSticks:
             nb = maxDist * 2 + 1
-        else: # pour index = 15, nb = 4
+        else:
             nb = maxDist + 1
         for i in range(1, nb):
             neuron = self.network.getNeuron(self.index - i)
@@ -78,22 +78,22 @@ class Neuron:
     # Choisi le neuron à jouer avec la méthode weighted_choice
     # Le neuron doit être atteignable (vérifié par testNeuron)
     # Condition d'arret:
-    # 0 <= connectionsClone.len <= connections.len
+    # 0 <= len(connectionsClone) <= len(connections)
     def chooseConnectedNeuron(self, shift):
         connectionsClone = copy(self.connections)
         neuron = self.weighted_choice(connectionsClone)
-       # print("shift: ", shift, " - index: ", neuron.index)
         while (len(connectionsClone) > 0 and not neuron.testNeuron(self.index-shift)):
             connectionsClone.pop(neuron)
             neuron = self.weighted_choice(connectionsClone)
-          #  print("index courrent: ", self.index," - shift: ", shift, " - index jouable ?: ", neuron.index)
         return neuron
 
+    # renvoie un booléen: True si la différence entre la 'inValue' et la valeur
+    # du neurone actuel est comprise entre 1 et 3 inclus
     def testNeuron(self, inValue):
         dif = inValue - self.index
         return dif >= 1 and dif <= 3
 
-    # Ajoute une récompense au poid de la connexion avec un neuron donné
+    # Ajoute une récompense au poids de la connexion avec un neuron donné
     def recompenseConnection(self, neuron):
         self.connections[neuron] += RECOMPENSE
 
@@ -104,7 +104,7 @@ class Neuron:
     def asString(self):
         return "N" + str(self.index)
 
-    # Choisi une aléatoirement un neuron parmis des connexions
+    # Choisi aléatoirement un neuron parmis des connexions,
     # en favorisant la connexion la plus lourde.
     def weighted_choice(self, connections):
         # Somme total du poid des connexions

@@ -1,6 +1,7 @@
 import random
 from Neuron import *
 
+# Nombre maximal possible
 MAX_DIST = 3
 
 class Player:
@@ -62,7 +63,6 @@ class CPUPlayer(Player):
             return 1
         if (self.previousNeuron is None):
             self.previousNeuron = self.netw.getNeuron(sticks)
-       # print("previous neuron now equal to ", self.previousNeuron.index)
         # Calcul du shift (coup joué par l'utilisateur)
         shift = self.previousNeuron.index - sticks
         # Choix du neuron
@@ -76,11 +76,14 @@ class CPUPlayer(Player):
 
     def getNeuronNetwork(self):
         return self.netw
+    # Réinitialise le joueur et récompense le réseau de neuron
     def addWin(self):
         super().addWin()
         self.netw.recompenseConnections()
         self.previousNeuron = None
         self.netw.initPath()
+
+    # Réinitialise le joueur
     def addLoss(self):
         super().addLoss()
         self.previousNeuron = None
