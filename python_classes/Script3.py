@@ -1,54 +1,22 @@
 from Game import *
 
+#Nous observons des parties successives de toute les combinaisons entre les easy, medium et hard -
+# (easy vs easy, easy vs medium...)
+# nous évaluons ensuite leur performance.
+def script3(sticks):
+    list = ['easy', 'medium', 'hard']
+    for i in range(len(list)):
+        for j in range(len(list)):
+            p = CPUPlayer("CPU", list[i], sticks)
+            p1 = CPUPlayer("CPU", list[j], sticks)
+            print(list[i], " vs ", list[j])
+            for v in range(0, 2000):
+                Game(sticks).start(p, p1, False)
+            print(list[i],"'s score :")
+            print(p.getNbWin(), " / 2000")
+            print(list[j],"'s score :")
+            print(p1.getNbWin(), " / 2000")
+            print("")
+        print("---------------")
 
-def Script3(sticks):
-    p = CPUPlayer("CPU", "easy", sticks)
-    p1 = CPUPlayer("CPU", "easy", sticks)
-    print("Easy vs Easy")
-    Scriptfor3(sticks, p, p1)
-    p = CPUPlayer("CPU", "easy", sticks)
-    p1 = CPUPlayer("CPU", "medium", sticks)
-    print("Easy vs Medium")
-    Scriptfor3(sticks, p, p1)
-    p = CPUPlayer("CPU", "easy", sticks)
-    p1 = CPUPlayer("CPU", "hard", sticks)
-    print("Easy vs Hard")
-    Scriptfor3(sticks, p, p1)
-    p = CPUPlayer("CPU", "medium", sticks)
-    p1 = CPUPlayer("CPU", "easy", sticks)
-    print("Medium vs Easy")
-    Scriptfor3(sticks, p, p1)
-    p = CPUPlayer("CPU", "medium", sticks)
-    p1 = CPUPlayer("CPU", "medium", sticks)
-    print("Medium vs Medium")
-    Scriptfor3(sticks, p, p1)
-    p = CPUPlayer("CPU", "medium", sticks)
-    p1 = CPUPlayer("CPU", "hard", sticks)
-    print("Medium vs Hard")
-    Scriptfor3(sticks, p, p1)
-    p = CPUPlayer("CPU", "hard", sticks)
-    p1 = CPUPlayer("CPU", "easy", sticks)
-    print("Hard vs Easy")
-    Scriptfor3(sticks, p, p1)
-    p = CPUPlayer("CPU", "hard", sticks)
-    p1 = CPUPlayer("CPU", "medium", sticks)
-    print("Hard vs Medium")
-    Scriptfor3(sticks, p, p1)
-    p = CPUPlayer("CPU", "hard", sticks)
-    p1 = CPUPlayer("CPU", "hard", sticks)
-    print("Hard vs Hard")
-    Scriptfor3(sticks, p, p1)
-
-def Scriptfor3(sticks, p, p1):
-    for i in range(0, 2000):
-        Game(sticks).start(p, p1, False)
-    print("Connections de p: ")
-    p.netw.printAllConnections()
-    print("Scores de p: ")
-    p.netw.printScores()
-    print("Connections de p1: ")
-    p.netw.printAllConnections()
-    print("Scores de p1: ")
-
-
-Script3(15)
+script3(15)

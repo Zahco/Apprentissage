@@ -1,5 +1,9 @@
 import random
 from copy import copy
+from collections import Counter
+
+# Nombre maximal possible
+MAX_DIST = 3
 
 BASE_WEIGHT = 10
 RECOMPENSE = 8
@@ -38,9 +42,16 @@ class NeuronNetwork:
             neuron1.recompenseConnection(neuron2)
         self.initPath()
 
+    def agregAllNeurons(self, netw2):
+        for neuron in self.neurons:
+            for neuron2 in netw2.neurons:
+                if (neuron.index == neuron2.index):
+                    neuron.agregNeuron(neuron2)
+
     # Affiche les connexions
     def printAllConnections(self):
         for neuron in self.neurons: neuron.printConnections()
+
     # Affiche les scores de chaque neurons
     def printScores(self):
         scores = {}
@@ -52,6 +63,7 @@ class NeuronNetwork:
                     scores[n] = scores[n] + s
         for neuron, score in scores.items():
             print(neuron.asString(), score)
+
 
 class Neuron:
     def __init__(self, network, index):
@@ -115,3 +127,12 @@ class Neuron:
             if upto + w >= r:
                 return c
             upto += w
+
+    def agregNeuron(self, neuron2):
+        for c, w in self.connections.items():
+            for c2, w2 in neuron2.connections.items():
+                if c.index == c2.index:
+                    self.connections[c] += w2
+
+
+
