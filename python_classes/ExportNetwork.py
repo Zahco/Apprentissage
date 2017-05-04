@@ -1,13 +1,31 @@
 from Game import *
-#from Player import *
+from Player import *
 
 #Permet la création de notre réseau de neurone 'hard' le plus efficace.
+def exportNetwork(learningRange, sticks, network):
+    answer = 'No'
+    while answer not in ['1', 'yes', 'Yes', 'y', 'Y']:
+        p = CPUPlayer("CPU", "hard", sticks)
+        p1 = CPUPlayer("CPU", "hard", sticks)
+        p2 = CPUPlayer("CPU", "hard", sticks)
+        p3 = CPUPlayer("CPU", "medium", sticks)
+        for i in range(0, learningRange):
+            Game(sticks).start(p1, p, False)
+        p1.netw.printAllConnections()
+        print("")
+        print("Succes rate : ", (p1.getNbWin() / (learningRange)) * 100)
+        print("Are you satisfied with this neuronal network?")
+        print("1 -> Yes, 2 -> No : ")
+        answer = input("")
+    pickle.dump(p1.netw, open(network, "wb"))
+
+#Ajoute l'agrégation.
 #Nous créons deux réseaux de neurones:
 #Le premier jouant en premier contre un hard
 #Le deuxième jouant en deuxième contre un medium
 #Nous agrégeons les deux en un dernier réseau de neurone capable de s'adapter aux
 #différentes situations (cf. le rapport)
-def exportNetwork(learningRange, sticks, network):
+def exportAgregNetwork(learningRange, sticks, network):
     answer = 'No'
     while answer not in ['1', 'yes', 'Yes', 'y', 'Y']:
         p = CPUPlayer("CPU", "hard", sticks)
@@ -33,6 +51,7 @@ def exportNetwork(learningRange, sticks, network):
         answer = input("")
     pickle.dump(p1.netw, open(network, "wb"))
 
+#Ajoute la réduction des poids en plus de l'agrégation
 def exportPunishedNetwork(learningRange, sticks, network):
     answer = 'No'
     while answer not in ['1', 'yes', 'Yes', 'y', 'Y']:
@@ -63,4 +82,5 @@ def exportPunishedNetwork(learningRange, sticks, network):
     pickle.dump(p1.netw, open(network, "wb"))
 
 exportNetwork(100000, 15, "network.nnw")
+#exportAgregNetwork(100000, 15, "agregNetwork.nnw")
 #exportPunishedNetwork(100000, 15, "punishedNetwork.nnw")

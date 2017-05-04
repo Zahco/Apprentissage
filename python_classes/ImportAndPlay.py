@@ -9,3 +9,5 @@ def importAndPlay(netw, sticks):
     Game(sticks).start(p, p1, True)
 
 importAndPlay("network.nnw", 15)
+#importAndPlay("agregNetwork.nnw", 15)
+#importAndPlay("punishedNetwork.nnw", 15)
