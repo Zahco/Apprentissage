@@ -2,6 +2,8 @@ from Game import *
 
 
 # Exemple d'importation d'un réseau neuronal sur un joueur 'hard' et lancement de la partie
+# netw : fichier contenant le réseau neuronal
+# sticks : nombre de bâtons
 def importAndPlay(netw, sticks):
     p = HumanPlayer("human")
     p1 = CPUPlayer("CPU", "hard", sticks)

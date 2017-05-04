@@ -2,8 +2,7 @@ from Game import *
 
 #Script final permettant le lancement du jeu.
 #Le Joueur joue contre le niveau de CPU qu'il souhaite.
-#S'il joue contre un hard, un réseau de neurone est chargé (nous pouvons changer le réseau de neurone
-#dans l'appelle du script de lancement)
+#S'il joue contre un hard, un réseau de neurone est chargé
 #Le Joueur peut choisir quel réseau neuronal charger entre :
 #'network.nnw' : un réseau neuronal entrainé contre un autre hard en jouant en premier.
 #'agregNetwork.nnw' : un réseau neuronal résultant de l'agrégation de deux joueurs hard,
@@ -14,7 +13,8 @@ from Game import *
 #le premier jouant contre un hard en premier
 #le deuxième jouant contre un medium en deuxième.
 #Le Joueur peut choisir s'il commence à jouer en premier ou non.
-def final(sticks, network):
+#sticks : nombre de bâtons
+def final(sticks):
     network = "network.nnw"
     print("Welcome to Nim's game!")
     print("Please input your name:")
@@ -57,5 +57,4 @@ def final(sticks, network):
         print("Nim starts!")
         Game(sticks).start(p1, p, True)
 
-final(15, "network.nnw")
-
+final(15)

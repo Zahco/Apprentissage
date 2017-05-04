@@ -3,7 +3,7 @@ from copy import copy
 from collections import Counter
 import sys
 
-# Nombre maximal possible
+# Nombre maximal de bâton jouable
 MAX_DIST = 3
 
 BASE_WEIGHT = 10

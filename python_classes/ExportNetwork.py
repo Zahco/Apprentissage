@@ -2,6 +2,9 @@ from Game import *
 from Player import *
 
 #Permet la création de notre réseau de neurone 'hard' le plus efficace.
+# learningRange : nombre partie joué
+# sticks : nombre de bâtons
+# network : nom de fichier créé
 def exportNetwork(learningRange, sticks, network):
     answer = 'No'
     while answer not in ['1', 'yes', 'Yes', 'y', 'Y']:
@@ -25,6 +28,9 @@ def exportNetwork(learningRange, sticks, network):
 #Le deuxième jouant en deuxième contre un medium
 #Nous agrégeons les deux en un dernier réseau de neurone capable de s'adapter aux
 #différentes situations (cf. le rapport)
+# learningRange : nombre partie joué
+# sticks : nombre de bâtons
+# network : nom de fichier créé
 def exportAgregNetwork(learningRange, sticks, network):
     answer = 'No'
     while answer not in ['1', 'yes', 'Yes', 'y', 'Y']:
@@ -52,6 +58,9 @@ def exportAgregNetwork(learningRange, sticks, network):
     pickle.dump(p1.netw, open(network, "wb"))
 
 #Ajoute la réduction des poids en plus de l'agrégation
+# learningRange : nombre partie joué
+# sticks : nombre de bâtons
+# network : nom de fichier créé
 def exportPunishedNetwork(learningRange, sticks, network):
     answer = 'No'
     while answer not in ['1', 'yes', 'Yes', 'y', 'Y']:
