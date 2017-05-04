@@ -11,8 +11,8 @@ def test(sticks, learningRange, firstMode, secondMode):
     if (secondMode == "hard"):
         second.netw.printAllConnections()
 
-#test(15, 10000, "hard", "medium")
-#test(15, 50000, "easy", "hard")
+test(15, 10000, "hard", "medium")
+test(15, 10000, "medium", "hard")
 
 
 def test2(sticks, learningRange, firstMode, secondMode):
@@ -27,5 +27,5 @@ def test2(sticks, learningRange, firstMode, secondMode):
         second.netw.printAllConnections()
 
 #test2(15, 10000, "hard", "medium")
-while 1:
-    test2(15, 1, "hard", "e")
+#while 1:
+ #   test2(15, 1, "hard", "e")

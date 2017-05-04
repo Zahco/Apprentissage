@@ -10,7 +10,9 @@ def chartMaker(sticks):
     for j in range(len(list)):
         sum = 0
         for i in range(0, 50):
+            #Graphiques classiques
             sum += learningPhase(list[j], sticks)
+            #Graphiques en utilisant la punition
             #sum += learningPhasePunish(list[j], sticks)
         print(sum / 50)
 

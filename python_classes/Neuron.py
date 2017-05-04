@@ -152,7 +152,7 @@ class PNeuronNetwork(NeuronNetwork):
     def __init__(self, maxDist, nbSticks):
         super().__init__(maxDist, nbSticks)
 
-    #def punisConnections(self):
-     #   for neuron1,neuron2 in self.path.items():
-      #      neuron1.punisConnection(neuron2)
-       # self.initPath()
+    def punisConnections(self):
+        for neuron1,neuron2 in self.path.items():
+            neuron1.punisConnection(neuron2)
+        self.initPath()

@@ -2,7 +2,7 @@ from Game import *
 
 #Nous observons des parties successives de toute les combinaisons entre les easy, medium et hard -
 # (easy vs easy, easy vs medium...)
-# nous évaluons ensuite leur performance.
+#Nous évaluons ensuite leur performance.
 def script3(sticks):
     list = ['easy', 'medium', 'hard']
     for i in range(len(list)):

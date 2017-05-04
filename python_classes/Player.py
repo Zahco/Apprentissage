@@ -55,35 +55,29 @@ class CPUPlayer(Player):
     def playEasy(self, sticks):
         return self.playRandom(sticks)
 
+    #Joue alétoirement entre 1 et MAX_DIST bâtons
+    #Cette fonction a été modifié de sa version originale (cf. rapport)
     def playRandom(self, sticks):
-        return random.randint(1, (sticks % MAX_DIST) + 1)
+        if sticks >= 3:
+            return random.randint(1, MAX_DIST)
+        else:
+            return random.randint(1, (sticks % MAX_DIST))
 
     def playHard(self, sticks):
         if sticks == 1:
             return 1
-
-
-        # Solution Prof
         if (self.previousNeuron is None):
             self.previousNeuron = self.netw.getNeuron(sticks)
-        # Algorithme naïf
-        #self.previousNeuron = self.netw.getNeuron(sticks)
-
-
         # Calcul du shift (coup joué par l'utilisateur)
         shift = self.previousNeuron.index - sticks
         # Choix du neuron
         neuron = self.previousNeuron.chooseConnectedNeuron(shift)
-        if neuron is None:
-            print("halt!")
-
-        nb = input('NNW Sticks?\n')
-        neuron = self.netw.getNeuron(sticks - int(nb))
-        # Enregistrement du choix du neuron (pour les futures récompenses)
+        # Enregistrement de la connexion au neuron (pour les futures récompenses)
         self.getNeuronNetwork().activateNeuronPath(self.previousNeuron, neuron)
         # Enregistrement du previous neuron
         self.previousNeuron = neuron
         return sticks - neuron.index
+
 
 
     def getNeuronNetwork(self):
