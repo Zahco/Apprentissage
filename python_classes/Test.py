@@ -1,10 +1,10 @@
 from Game import *
 
-def test(sticks):
-    while(True):
-        p = CPUPlayer("CPU", "hard", sticks)
-        p1 = HumanPlayer("bob")
-        Game(sticks).start(p1, p, True)
-        p.netw.printAllConnections()
+def test(sticks, learningRange):
+    hard = CPUPlayer("CPU", "hard", sticks)
+    medium = CPUPlayer("CPU", "medium", sticks)
+    for i in range(0, learningRange):
+        Game(sticks).start(medium, hard, False)
+    hard.netw.printAllConnections()
 
-test(15)
+test(15, 10000)

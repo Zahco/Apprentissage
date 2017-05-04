@@ -61,9 +61,15 @@ class CPUPlayer(Player):
     def playHard(self, sticks):
         if sticks == 1:
             return 1
+
+        
+        # Solution Prof
         if (self.previousNeuron is None):
             self.previousNeuron = self.netw.getNeuron(sticks)
-       # self.previousNeuron = self.netw.getNeuron(sticks)
+        # Algorithme naïf
+        #self.previousNeuron = self.netw.getNeuron(sticks)
+
+
         # Calcul du shift (coup joué par l'utilisateur)
         shift = self.previousNeuron.index - sticks
         # Choix du neuron
