@@ -43,9 +43,11 @@ class NeuronNetwork:
             neuron1.recompenseConnection(neuron2)
         self.initPath()
 
+    #Classe à surcharger si nous voulons punir les connexions
     def punisConnections(self):
         pass
 
+    #Agrège tous les neurons du réseau de neuron
     def agregAllNeurons(self, netw2):
         for neuron in self.neurons:
             for neuron2 in netw2.neurons:
@@ -113,13 +115,14 @@ class Neuron:
     def recompenseConnection(self, neuron):
         self.connections[neuron] += RECOMPENSE
 
+    #Punis les connexions d'un neuron
     def punisConnection(self, neuron):
         if self.connections[neuron] > RECOMPENSE + BASE_WEIGHT:
             self.connections[neuron] -= RECOMPENSE
         else:
             self.connections[neuron] = BASE_WEIGHT
-        #self.connections[neuron] -= RECOMPENSE
 
+    #Modifié de sa version original pour un résultat plus condensé
     def printConnections(self):
         print("Connections of", self.asString() + ":")
         for neuron in self.connections:
@@ -141,6 +144,7 @@ class Neuron:
                 return c
             upto += w
 
+    #Agrège les connexions de deux neurones
     def agregNeuron(self, neuron2):
         for c, w in self.connections.items():
             for c2, w2 in neuron2.connections.items():
@@ -148,6 +152,7 @@ class Neuron:
                     self.connections[c] += w2
 
 
+#Surchargement de la classe NeuronNetwork opérant la réduction de poids
 class PNeuronNetwork(NeuronNetwork):
     def __init__(self, maxDist, nbSticks):
         super().__init__(maxDist, nbSticks)

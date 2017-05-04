@@ -3,7 +3,7 @@ from Player import *
 
 #Deux CPU hards jouent l'un contre l'autre pendant 800 parties avec punition des réseaux de neurone.
 #Nous évaluons ensuite leurs nombres de victoire ainsi que leur réseaux de neurones
-def script2(sticks):
+def reductionPoids(sticks):
     p = CPUPlayer("CPU", "hard", sticks)
     p1 = CPUPlayer("CPU", "hard", sticks)
     p.netw = PNeuronNetwork(MAX_DIST, sticks)
@@ -30,4 +30,4 @@ def script2(sticks):
     print("Connections neuronales pondérées de p1: ")
     p1.netw.printScores()
 
-script2(15)
+reductionPoids(15)
