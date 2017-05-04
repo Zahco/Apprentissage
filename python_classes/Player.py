@@ -1,9 +1,6 @@
 import random
 from Neuron import *
 
-# Nombre maximal possible
-MAX_DIST = 3
-
 class Player:
     def __init__(self, name):
         self.name = name

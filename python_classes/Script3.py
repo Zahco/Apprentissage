@@ -3,6 +3,7 @@ from Game import *
 #Nous observons des parties successives de toute les combinaisons entre les easy, medium et hard -
 # (easy vs easy, easy vs medium...)
 #Nous évaluons ensuite leur performance.
+# sticks : nombre de bâtons
 def script3(sticks):
     list = ['easy', 'medium', 'hard']
     for i in range(len(list)):

@@ -2,6 +2,7 @@ from Game import *
 
 #Deux CPU hards jouent l'un contre l'autre pendant 800 parties.
 #Nous évaluons ensuite leurs nombres de victoire ainsi que leur réseaux de neurones
+# sticks : nombre de bâtons
 def script2(sticks):
     p = CPUPlayer("CPU", "hard", sticks)
     p1 = CPUPlayer("CPU", "hard", sticks)

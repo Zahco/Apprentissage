@@ -1,6 +1,7 @@
 from Game import *
 from Player import *
 
+# Script basé sur le Script2
 #Deux CPU hards jouent l'un contre l'autre pendant 800 parties avec punition des réseaux de neurone.
 #Nous évaluons ensuite leurs nombres de victoire ainsi que leur réseaux de neurones
 def reductionPoids(sticks):

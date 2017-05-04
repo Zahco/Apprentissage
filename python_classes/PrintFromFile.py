@@ -1,6 +1,8 @@
 from Game import *
 
 #Affiche toutes les connexions du réseau de neuron présent dans le fichier
+# sticks : nombre de bâtons
+# network : nom du fichier contenant le réseau neuronal
 def printFromFile(sticks, network):
     p1 = CPUPlayer("Nim", 'hard', sticks)
     p1.netw = pickle.load(open(network, "rb"))
