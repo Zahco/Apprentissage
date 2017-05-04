@@ -36,4 +36,5 @@ def final(sticks, network):
         Game(sticks).start(p1, p, True)
 
 
-final(15, "best.nnw")
+#final(15, "network.nnw")
+final(15, "punishedNetwork.nnw")

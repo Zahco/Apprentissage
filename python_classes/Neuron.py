@@ -42,6 +42,9 @@ class NeuronNetwork:
             neuron1.recompenseConnection(neuron2)
         self.initPath()
 
+    def punisConnections(self):
+        pass
+
     def agregAllNeurons(self, netw2):
         for neuron in self.neurons:
             for neuron2 in netw2.neurons:
@@ -109,6 +112,13 @@ class Neuron:
     def recompenseConnection(self, neuron):
         self.connections[neuron] += RECOMPENSE
 
+    def punisConnection(self, neuron):
+        if self.connections[neuron] > RECOMPENSE + BASE_WEIGHT:
+            self.connections[neuron] -= RECOMPENSE
+        else:
+            self.connections[neuron] = BASE_WEIGHT
+        #self.connections[neuron] -= RECOMPENSE
+
     def printConnections(self):
         print("Connections of", self.asString() + ":")
         for neuron in self.connections:
@@ -135,4 +145,11 @@ class Neuron:
                     self.connections[c] += w2
 
 
+class PNeuronNetwork(NeuronNetwork):
+    def __init__(self, maxDist, nbSticks):
+        super().__init__(maxDist, nbSticks)
 
+    #def punisConnections(self):
+     #   for neuron1,neuron2 in self.path.items():
+      #      neuron1.punisConnection(neuron2)
+       # self.initPath()
