@@ -55,9 +55,9 @@
   \subsection{Protocole des réalisations des graphiques}
   \paragraph{}
     Nous avons réalisé quelques statistiques concernant les différentes façons de jouer.
-    Chaque points des courbes est une moyenne de 100 parties jouées. Chaque partie comprend une phase d'apprentissage,
+    Chaque points des courbes est une moyenne de 50 parties jouées. Chaque partie comprend une phase d'apprentissage,
     où le réseau de neurones se construira. Nous avons donc échelonné cette phase d'apprentissage pour réaliser nos graphiques.
-    En conclusion le CPU apprendra sur 500 parties, nous effectuerons cet apprentissage 100 fois afin d'établir une moyenne de réussite.
+    En conclusion le CPU apprendra sur 500 parties, nous effectuerons cet apprentissage 50 fois afin d'établir une moyenne de réussite.
     Nous procéderons de manière identique avec une phase d'apprentissage à 1.000 parties et ainsi de suite jusqu'à arriver à une phase d'apprentissage à 100.000 parties.
   \paragraph{}
     Il est important de remarquer nous notre échelonnage est \textbf{non proportionnel}. Il est donc possible de voir
@@ -81,13 +81,13 @@
     ]
     
     \addplot[color=blue,mark=square,]
-	coordinates {(0,50)(1,47)(2, 60)(3, 68)(4, 81)(5, 89)(6, 95)(7, 97)};
+	coordinates {(0,50)(1,53)(2,58)(3, 66)(4, 80)(5, 89)(6, 94)(7, 97)};
     \addplot[color=gray,mark=square,]
-	coordinates {(0,50)(1,45)(2, 39)(3, 33)(4, 16)(5, 12)(6, 4)(7, 3)};
+	coordinates {(0,50)(1,48)(2, 42)(3, 34)(4, 20)(5, 11)(6, 6)(7, 3)};
   
     \end{axis}
     \end{tikzpicture}\\
-    Nous voyons ici qu'en jouant 800 parties, le CPU obtiendrais une moyenne de 65\% de réussite. De
+    Nous voyons ici qu'en jouant 800 parties, le CPU obtiendrais une moyenne de 63\% de réussite. De
     plus, nous pouvons affirmer qu'à partir de 50.000 parties jouées, le CPU ne fera quasiment plus d'erreurs.\\
     En théorie les deux courbes présentent sur ce graphique devrait être symétrique. Cependant nous avons effectué des moyennes 
     avec différent set de jeu. Cela explique l'asymétrie entre nos courbes.
@@ -103,7 +103,7 @@
 	xmin=0, xmax=7,xtick={0,1,2,3,4,5,6,7},
 	xticklabels={0,100,500,1.000,5.000,10.000,50.000,100.000},
 	scaled ticks=false,
-	tick label style={/pgf/number format/fixed},
+	tick label style={/pgf/number format/fixed}, smooth,
 	legend entries={Second joueur easy,Second joueur medium,Second joueur hard},
 	legend style={at={(0,1)},anchor=north west},
 	legend cell align={left}
@@ -111,9 +111,9 @@
     \addplot[color=green,mark=square,]
 	coordinates {(0,49)(1,49)(2, 51)(3, 50.5)(4, 50)(5, 50)(6, 50)(7, 50)};
     \addplot[color=blue,mark=square,]
-	coordinates {(0,7)(1,5)(2, 6)(3, 6.5)(4, 6)(5, 6)(6, 6)(7, 6)};
+	coordinates {(0,17)(1,16)(2, 17.5)(3, 17)(4, 17)(5, 17)(6, 17)(7, 17)};
     \addplot[color=red,mark=square,]
-	coordinates {(0,50)(1,3)(2, 2)(3, 1)(4, 1)(5, 1)(6, 0.5)(7, 0.5)};
+	coordinates {(0,50)(1,27)(2, 21)(3, 20)(4, 17)(5, 16)(6, 14)(7, 14)};
   
     \end{axis}
     \end{tikzpicture}
@@ -134,11 +134,11 @@
 	legend cell align={left}
     ]
     \addplot[color=green,mark=square,]
-	coordinates {(0,96)(1,95)(2, 94)(3, 94)(4, 95)(5, 95)(6, 95)(7, 95)};
+	coordinates {(0,80)(1,81)(2, 81)(3, 82)(4, 81)(5, 81)(6, 81)(7, 81)};
     \addplot[color=blue,mark=square,]
 	coordinates {(0,51)(1,51)(2, 49.5)(3, 50)(4, 50)(5, 50)(6, 50)(7, 50)};
     \addplot[color=red,mark=square,]
-	coordinates {(0,95)(1,50)(2, 27)(3, 21)(4, 11)(5, 11)(6, 7)(7, 5)};
+	coordinates {(0,95)(1,47)(2, 28)(3, 23)(4, 17)(5, 16)(6, 16)(7, 15)};
   
     \end{axis}
     \end{tikzpicture}
@@ -166,11 +166,11 @@
 	legend cell align={left}
     ]
     \addplot[color=green,mark=square,]
-	coordinates {(0,50)(1,90)(2, 96)(3, 97)(4, 98)(5, 98)(6, 99)(7, 99.5)};
+	coordinates {(0,50)(1,74)(2, 80)(3, 84)(4, 86)(5, 86)(6, 88)(7, 91)};
     \addplot[color=blue,mark=square,]
-	coordinates {(0,5)(1,50)(2, 76)(3, 81)(4, 89)(5, 90)(6, 93)(7, 94)};
+	coordinates {(0,5)(1,54)(2, 75)(3, 80)(4, 87)(5, 87)(6, 88)(7, 90)};
     \addplot[color=red,mark=square,]
-	coordinates {(0,50)(1,47)(2, 60)(3, 68)(4, 81)(5, 89)(6, 95)(7, 97)};
+	coordinates {(0,50)(1,53)(2,58)(3, 66)(4, 80)(5, 89)(6, 94)(7, 97)};
   
     \end{axis}
     \end{tikzpicture}\\
@@ -192,6 +192,44 @@
 
 \newpage
 
+\section{Correction apportée}
+  \paragraph{}
+    Suite à nos différent tests, nous avons généré et testé un réseau entraîné à jouer en second contre un CPU \emph{medium}.
+    Durant notre phase de test, nous avons importé son réseau afin de jouer contre lui (en le plaçant dans le même rôle, c'est-à-dire qu'il va jouer en second).
+    Nous nous sommes aperçus que le CPU n'arrivait pas à retrouver la stratégie gagnante en fin de partie. La raison était simple, ce réseau n'avait aucune 
+    connexion de poids supérieur à \emph{BASE\_WEIGHT} à partir du neurone 6. Pensant à un coup du sort, nous avons relancé l'algorithme sans succès. Il est à noter
+    que ce problème ne survenait que contre un CPU \emph{medium}.
+  \paragraph{}
+    Nous avons donc dans un premier temps changé d'algorithme dans \emph{playHard} afin de vérifier l'intégrité du réseau de neurone. C'est un algorithme naïf
+    qui sauvegardait et récompensait uniquement les connexions de distance 3. Dans ce cas toutes les connexions s'établissaient correctement. Seulement 
+    les performances devait être revu à la baisse. Et cela pour une raison simple, en supposant que le CPU applique la stratégie gagnante: dans le cas où nous sommes 
+    fasse à 13 bâtons, quelques soit le nombre de bâton que nous jouions, le CPU pourra toujours rendre le main avec 9 bâtons en jeu. Cependant avec notre algorithme naïf, 
+    ne récompensera qu'une des connexions suivantes (12->9), (11->9) ou (10->9);
+    alors qu'avec l'algorithme proposé, le CPU récompense la connexion (13->9) pour les 3 cas de figure ce qui lui donne plus de poids.
+  \paragraph{}
+    Ayant une perte de performances, nous avons décidé de reprendre l'algorithme qui nous était suggérer. Pour éliminer toutes incertitudes liées à l'aléatoire,
+    nous avons calculer le nombre de combinaisons possible: 5768, puis le nombre de combinaisons quand le second joueur passe par le neurone 6 et gagne la partie: 324.
+    Après avoir fait tourner l'algorithme plus de 10 million de fois sans jamais avoir trouver de réseau avec au moins une connexion récompensée sur le neurone 6, 
+    nous pouvons affirmer qu'il y a bien une erreur dans l'algorithme.
+  \paragraph{}
+    En étudiant précisément les différents jeu exécuté, pour avons remarqué quelques similarités intéressantes. En effet quand si on rend 6 bâtons au CPU \emph{medium},
+    alors il jouera toujours 1 bâton. Voici le code de \emph{playRandom}:
+    \begin{lstlisting}[language=python]
+    	return random.randint(1, (sticks%3)+1)
+    \end{lstlisting}
+    Or s'il reste 6 bâtons, \emph{sticks} vaut 6, 6 modulo 3 vaut 0 et 0 plus 1 vaut 1. Donc s'il reste 6 bâtons \emph{playRandom} renverra toujours 1, ce qui ai incohérent.
+    C'est la raisons pour laquelle le CPU \emph{medium} réussissait toujours à reprendre la stratégie gagnante avec 6 bâtons, et que par conséquent nous n'enregistrions pas de connexions
+    avec notre réseau de neurone.
+    Voici la correction apportée:
+    \begin{lstlisting}[language=python]
+    	if sticks >= 3:
+            return random.randint(1, MAX_DIST)
+        else:
+            return random.randint(1, (sticks % MAX_DIST))
+    \end{lstlisting}
+    \emph{MAX\_DIST} équivaut à la distance maximal, dans notre cas \emph{MAX\_DIST} vaut 3.
+\newpage
+
 \section{Proposition}
   \subsection{Agrégation}
   \paragraph{} 
@@ -208,8 +246,8 @@
   \paragraph{}
     Mais ici le but de notre réseau neuronal résultant est de reprendre la stratégie gagnante dans le cas où le joueur adverse commet une erreur.
     
-  \paragraph{Observation}
-    Après plusieurs test, nous avons remarqué
+  \paragraph{Remarque}
+    Cette amélioration a été développé et est utilisé dans le script \emph{ExportNetwork.py}.
     
   \subsection{Réduction des poids}
   \paragraph{}
@@ -221,11 +259,14 @@
     Il est donc important que le poids d'une connexion ne tombe jamais à 0. Afin que le réseau puisse en permanence évaluer tout les cas
     possibles. C'est un processus obligatoire dans la correction d'erreurs. Cela implique - encore une fois - que le réseau ne pourra pas avoir un taux de
     réussite strictement égal à 100\%.
+  \paragraph{Remarque}
+    Cette amélioration a été développé et est utilisé dans le script \emph{ExportNetwork.py}.
       \subsubsection{Graphique de réussite avec réduction du poids}
 	\paragraph{}
 	\begin{tikzpicture}
 	\begin{axis}[
-	    title={Évolution du taux moyen de réussite d'un joueur \textbf{hard} avec réduction du poids},
+	    title style={align=center},
+	    title={Évolution du taux moyen de réussite d'un joueur \textbf{hard} jouant en premier, \\ avec réduction du poids},
 	    ylabel={Taux de réussite en pourcentage },
 	    xlabel={Nombre de parties},
 	    ymin=0, ymax=100,ytick={0,20,40,60,80,100},
@@ -239,9 +280,37 @@
 	]
 	
 	\addplot[color=red,mark=square,]
-	    coordinates {(0,50)(1,52)(2, 81)(3, 88)(4, 97)(5, 99)(6, 99.7)(7, 99.8)};
+	    coordinates {(0,50)(1,55)(2, 79)(3, 88)(4, 97)(5, 99)(6, 99.7)(7, 99.8)};
 	\addplot[color=blue,mark=square,]
-	    coordinates {(0,0)(1,53)(2, 83)(3, 90)(4, 97)(5, 98)(6, 99)(7, 99)};
+	    coordinates {(0,0)(1,52)(2, 76)(3, 82)(4, 89)(5, 90)(6, 91)(7, 91)};
+	\addplot[color=green,mark=square,]
+	    coordinates {(0,50)(1,78)(2, 86)(3, 89)(4, 93)(5, 93)(6, 94.5)(7, 95)};
+      
+	\end{axis}
+	\end{tikzpicture}\\
+	\paragraph{}
+	\begin{tikzpicture}
+	\begin{axis}[
+	    title style={align=center},
+	    title={Évolution du taux moyen de réussite d'un joueur \textbf{hard} jouant en second, \\ avec réduction du poids},
+	    ylabel={Taux de réussite en pourcentage },
+	    xlabel={Nombre de parties},
+	    ymin=0, ymax=100,ytick={0,20,40,60,80,100},
+	    xmin=0, xmax=7,xtick={0,1,2,3,4,5,6,7},
+	    xticklabels={0,100,500,1.000,5.000,10.000,50.000,100.000},
+	    scaled ticks=false,
+	    tick label style={/pgf/number format/fixed}, smooth,
+	    legend entries={Premier joueur hard,Premier joueur medium, Premier joueur easy},
+	    legend style={at={(1,0)},anchor=south west},
+	    legend cell align={left}
+	]
+	
+	\addplot[color=red,mark=square,]
+	    coordinates {(0,50)(1,48)(2, 21)(3, 10)(4, 3)(5, 1.5)(6, 0.3)(7, 0.15)};
+	\addplot[color=blue,mark=square,]
+	    coordinates {(0,0)(1,52)(2, 80)(3, 87)(4, 92)(5, 94)(6, 94.7)(7, 96.8)};
+	\addplot[color=green,mark=square,]
+	    coordinates {(0,50)(1,77)(2, 85)(3, 87)(4, 90)(5, 92)(6, 93)(7, 93.2)};
       
 	\end{axis}
 	\end{tikzpicture}\\
