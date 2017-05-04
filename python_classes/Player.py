@@ -62,7 +62,7 @@ class CPUPlayer(Player):
         if sticks == 1:
             return 1
 
-        
+
         # Solution Prof
         if (self.previousNeuron is None):
             self.previousNeuron = self.netw.getNeuron(sticks)
@@ -76,6 +76,9 @@ class CPUPlayer(Player):
         neuron = self.previousNeuron.chooseConnectedNeuron(shift)
         if neuron is None:
             print("halt!")
+
+        nb = input('NNW Sticks?\n')
+        neuron = self.netw.getNeuron(sticks - int(nb))
         # Enregistrement du choix du neuron (pour les futures récompenses)
         self.getNeuronNetwork().activateNeuronPath(self.previousNeuron, neuron)
         # Enregistrement du previous neuron

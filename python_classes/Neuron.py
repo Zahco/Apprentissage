@@ -1,6 +1,7 @@
 import random
 from copy import copy
 from collections import Counter
+import sys
 
 # Nombre maximal possible
 MAX_DIST = 3
@@ -122,7 +123,9 @@ class Neuron:
     def printConnections(self):
         print("Connections of", self.asString() + ":")
         for neuron in self.connections:
-            print(neuron.asString(), self.connections[neuron])
+            if self.connections[neuron] != BASE_WEIGHT:
+                sys.stdout.write("[" + neuron.asString() + " " + str(self.connections[neuron]) + "] ")
+        sys.stdout.write('\n')
     def asString(self):
         return "N" + str(self.index)
 
